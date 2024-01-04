@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Budget = () => {
-    const { budget, remaining, currency } = useContext(AppContext);
+    const { budget, remaining, currency, dispatch } = useContext(AppContext);
     const [newBudget, setNewBudget] = useState(budget);
     const handleBudgetChange = (event) => {
         if (event.target.value > 20000) {
@@ -16,6 +16,10 @@ const Budget = () => {
                 setNewBudget(event.target.value);
             }
         }
+        dispatch({
+            type: "SET_BUDGET",
+            payload: newBudget,
+        })
     }
     return (
 <div className='alert alert-secondary'>
@@ -25,3 +29,4 @@ const Budget = () => {
     );
 };
 export default Budget;
+
